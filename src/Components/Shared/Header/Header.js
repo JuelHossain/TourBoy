@@ -3,7 +3,15 @@ import CustomLink from "../../../Utilities/CustomLInk/CustomLink";
 import logo from "../../../logo.png";
 import { Link } from "react-router-dom";
 import { authButton, navButton } from "../../../Utilities/ClassName/ClassName";
+import auth from "../../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+
 const Header = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const logout = () => {
+  signOut(auth);
+};
   return (
     //header component
 
@@ -33,13 +41,14 @@ const Header = () => {
       <div className=" flex w-1/4 justify-center underline underline-offset-4">
         {/* signup here  */}
         <div className={authButton}>
-          <Link to={"/register"}>SignUp</Link>
+          <Link to={user?'/user':'/register'}>{user?user.displayName:'Register'}</Link>
         </div>
 
-        {/* login here  */}
-        <div className={authButton}>
-          <Link to={"/login"}>Login</Link>
-        </div>
+        {/* login here  */
+          <div className={authButton}>
+            {user ? <button onClick={logout}>LogOut</button> :
+            <Link to={'/login'}>{'Login'}</Link>}
+          </div>}
       </div>
     </header>
   );
