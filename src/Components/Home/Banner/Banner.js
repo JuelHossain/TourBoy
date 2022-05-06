@@ -5,8 +5,19 @@ const Banner = () => {
     return (
       <div>
         <div className="relative">
-          <img className="object-cover " src={banner} alt="banner img" />
-          <h1 className="absolute inset-x-0 bottom-0 h-16 ">Tour Boy</h1>
+          <div className="absolute right-80 bottom-60  ">
+            <h1 className="text-7xl mb-2 p-4 bg-red-800 text-stone-300 font-bold hover:bg-[#2c2a38]">
+              Tour Boy
+            </h1>
+            <p className="text-5xl bg-stone-300 p-3">
+              The Guide You Want To Hire
+            </p>
+          </div>
+          <img
+            className="object-cover h-[800px] w-full"
+            src={banner}
+            alt="banner img"
+          />
         </div>
       </div>
     );

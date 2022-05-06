@@ -1,0 +1,80 @@
+[
+    {
+        "id":1 ,
+        "packageName":"Dhaka Tour",
+        "duration":"8 hours",
+        "pickup":"2pm",
+        "dropoff":"10pm",
+        "Price":8000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://i.pinimg.com/originals/64/bd/87/64bd87ae69d911486d5c5f63fc508832.jpg",
+        "description":"I will pick you up from your place and you will see the Raw Beauty of Dhaka City of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        },
+    {
+        "id":2 ,
+        "packageName":"Shylet Tour",
+        "duration":"6 hours",
+        "pickup":"2pm",
+        "dropoff":"8pm",
+        "Price":10000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://i.pinimg.com/originals/b8/09/83/b8098387dcd3f817c564e2a6a7b1eb23.jpg",
+        "description":"I will pick you up from your place and you will see the Raw Beauty of Beautiful Sylhet of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        },
+    {
+        "id":3 ,
+        "packageName":"Rangmati Tour",
+        "duration":"6 hours",
+        "pickup":"2pm",
+        "dropoff":"8pm",
+        "Price":12000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://i.pinimg.com/originals/ff/ca/4f/ffca4ff6fa8ff05a1e5da5bde876f01a.jpg",
+        "description":"i will pick you up from your place and you will see the Raw Beauty of Rangamati of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        },
+    {
+        "id":4 ,
+        "packageName":"Bandarban Tour",
+        "duration":"6 hours",
+        "pickup":"2pm",
+        "dropoff":"8pm",
+        "Price":11000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://i.pinimg.com/originals/88/58/38/8858381bd0ced28062ebd6e3cc7eabf6.png",
+        "description":"i will pick you up from your place and you will see the Raw Beauty of Bandarban  of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        },
+    {
+        "id":5 ,
+        "packageName":"Cox's Bazar",
+        "duration":"8 hours",
+        "pickup":"2pm",
+        "dropoff":"10pm",
+        "Price":16000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://images.unsplash.com/photo-1587302525159-2363f54affd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+        "description":"i will pick you up from your place and you will see the Raw Beauty of Cox's Bazar of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        },
+    {
+        "id":6 ,
+        "packageName":"Sajek Tour",
+        "duration":"8 hours",
+        "pickup":"2pm",
+        "dropoff":"10pm",
+        "Price":8000,
+        "carService":"Included",
+        "streetFood":"Included",
+        "Water": "Included",
+        "picture":"https://cdn.pixabay.com/photo/2019/12/12/15/14/bangladesh-4690975_960_720.jpg",
+        "description":"i will pick you up from your place and you will see the Raw Beauty of Sajek Valley of Day and Night Lunch and Dinner is Not Included I can suggest you the best place to do the lunch and dinner if you want."
+        }
+]

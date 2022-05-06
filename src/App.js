@@ -7,6 +7,8 @@ import Blogs from './Components/Blogs/Blogs';
 import About from './Components/About/About';
 import Login from './Components/Authentication/Login/Login';
 import Register from './Components/Authentication/Register/Register';
+import Footer from './Components/Shared/Footer/Footer';
+import NotFound from './Components/Shared/NotFound/NotFound';
 
 
 function App() {
@@ -21,7 +23,9 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
