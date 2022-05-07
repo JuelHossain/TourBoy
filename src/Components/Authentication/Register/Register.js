@@ -18,6 +18,10 @@ import Loading from "../../Shared/Loading/Loading";
 const Register = () => {
   // states
   const [text, setText] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // useref
   const nameRef = useRef('');
@@ -25,8 +29,6 @@ const Register = () => {
   const passwordRef = useRef('');
   const confirmPasswordRef = useRef('');
 
-  //set value
-  
   //navigation
   const navigate = useNavigate();
 
@@ -42,7 +44,6 @@ const Register = () => {
   
   //conditional formatting 
   if (user || googleuser || facebookuser) {
-    console.log(user);
     navigate('/');
     window.location.reload(true);
   } else if (loading || updating || googleloading || facebookloading) {
@@ -51,7 +52,6 @@ const Register = () => {
     toast.error(error.toString().slice(37, -2));
   }
 
-  
   // event handler
   const handleFocus = (e) => {
     setText(e.current.placeholder);
@@ -61,6 +61,19 @@ const Register = () => {
   };
 
   const handleBlur = (e) => {
+    if (text === "Name") {
+      setName(e.current.value)
+      console.log(name);
+    } else if (text === "Email") {
+      setEmail(e.current.value);
+      console.log(email);
+    } else if (text === "Password") {
+      setPassword(e.current.value);
+      console.log(password);
+    } else if (text === "Confirm Password") {
+      setConfirmPassword(e.current.value);
+      console.log(confirmPassword);
+    }
     e.current.placeholder = text;
     e.current.parentElement.className = "static";
     e.current.parentElement.childNodes[1].classList.add("hidden");
@@ -68,21 +81,22 @@ const Register = () => {
 
   const handleRegister = async e => {
     e.preventDefault();
-    let username = nameRef.current.value;
-    let email = emailRef.current.value;
-    let password = passwordRef.current.value;
-    let confirmPassword = confirmPasswordRef.current.value;
-    if (password !== confirmPassword) {
-    await confirmPasswordRef.current.setCustomValidity("Password Doesn't Match");
-    await confirmPasswordRef.current.reportValidity();
-    console.log(confirmPasswordRef);
+    // const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+    // if (typeof name === "number" && name.length<4 && !name) {
+    //   toast.error("Please Type a valid Name")
+    // } else if (!pattern.test(email)) {
+    //   toast.error("Please Type a valid email address")
+    // }else if (password < 6) {
+    //   toast.error("PassWord Must Contain At Least 6 Character")
+    // }else if (password !== confirmPassword) {
+    if(password!==confirmPassword){
+   toast.error("Password Doesn't Match")
     } else {
-      await confirmPasswordRef.current.setCustomValidity("");
       await createUserWithEmailAndPassword(email, password);
-      await updateProfile(username);
+      await updateProfile({displayName: name });
     }
   };
-
   // registration form
   return (
     <section id="register" className="flex justify-center">
@@ -95,7 +109,8 @@ const Register = () => {
           <input
             ref={nameRef}
             onFocus={() => handleFocus(nameRef)}
-            onBlur={() => handleBlur(nameRef)}
+            onBlur={() =>
+              handleBlur(nameRef)}
             className={inputField}
             type="text"
             placeholder="Name"
@@ -175,7 +190,7 @@ const Register = () => {
           Already Registered?
         </Link>
       </form>
-      <ToastContainer />
+      <ToastContainer className='bottom-0 right-0'/>
     </section>
   );
 };

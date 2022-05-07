@@ -10,6 +10,7 @@ const Places = () => {
         <div className="grid grid-cols-2 gap-4">
           {tour.map((tourplaces) => (
             <PlaceCard
+              key={tourplaces.id}
               name={tourplaces.name}
               photo={tourplaces.photo}
               description={tourplaces.about}
