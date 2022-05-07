@@ -46,7 +46,7 @@ const Header = () => {
 
         {/* login here  */
           <div className={authButton}>
-            {user ? <button onClick={logout}>LogOut</button> :
+            {user? <button onClick={logout}>LogOut</button> :
             <Link to={'/login'}>{'Login'}</Link>}
           </div>}
       </div>

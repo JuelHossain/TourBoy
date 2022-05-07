@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import {
   inputField,
@@ -8,13 +8,32 @@ import {
 } from "../../../Utilities/ClassName/ClassName";
 
 const Login = () => {
+  //states
+  const [text, setText] = useState("");
+  //navigation
+  const navigate = useNavigate();
+  const location = useLocation();
+  const destination = location.state?.from?.pathname || '/';
+
+  // firebase hooks
   const [signInWithGoogle, googleuser, googleloading, googleerror] =
     useSignInWithGoogle(auth);
   const [signInWithFacebook, facebookuser, facebookloading, facebookerror] =
     useSignInWithFacebook(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const [text, setText] = useState("");
+
+  //conditional formatting
+  if (googleuser || facebookuser || user) {
+    navigate(destination,{replace:true});
+    window.location.reload(true);
+  } else if (loading  || googleloading || facebookloading) {
+    console.log("loading");
+  } else if (error || googleerror || facebookerror) {
+    console.log(error  || googleerror || facebookerror);
+  }
+
+  // event handler
   const handleFocus = (e) => {
     setText(e.target.placeholder);
     e.target.placeholder = "";
@@ -25,14 +44,14 @@ const Login = () => {
     e.target.placeholder = text;
     e.target.parentElement.className = "static";
     e.target.parentElement.childNodes[1].classList.add("hidden");
-  }
-  const handleLogin = e => {
+  };
+  const handleLogin = (e) => {
     e.preventDefault();
     console.log(e);
     const email = e.target.email.value;
     const password = e.target.password.value;
     signInWithEmailAndPassword(email, password);
-  }
+  };
   return (
     <section id="login" className="flex justify-center">
       <form onSubmit={handleLogin} className="flex flex-col gap-4 text-center">
@@ -68,7 +87,7 @@ const Login = () => {
         <input className={submitButton} type="submit" value="login" />
         <input
           onClick={() => {
-            signInWithGoogle()
+            signInWithGoogle();
           }}
           className={submitButton}
           type="button"
@@ -76,7 +95,7 @@ const Login = () => {
         />
         <input
           onClick={() => {
-            signInWithFacebook()
+            signInWithFacebook();
           }}
           className={submitButton}
           type="button"

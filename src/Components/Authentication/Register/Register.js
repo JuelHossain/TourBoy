@@ -1,8 +1,11 @@
-import { configure } from "@testing-library/react";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import React, { useState } from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithFacebook,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import {
   inputField,
@@ -10,29 +13,50 @@ import {
 } from "../../../Utilities/ClassName/ClassName";
 
 const Register = () => {
+  // states
   const [text, setText] = useState("");
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  //navigation
+  const navigate = useNavigate();
+
+  // firebase hooks
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true});
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-  const [signInWithGoogle, googleuser, googleloading, googleerror] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleuser, googleloading, googleerror] =
+    useSignInWithGoogle(auth);
   const [signInWithFacebook, facebookuser, facebookloading, facebookerror] =
     useSignInWithFacebook(auth);
+
+  
+  //conditional formatting 
+  if (googleuser||facebookuser||user) {
+    navigate('/');
+    window.location.reload(true);
+  } else if (loading || updating || googleloading || facebookloading) {
+    console.log('loading');
+  } else if (error || updateError || googleerror || facebookerror) {
+    console.log(error || updateError || googleerror || facebookerror);
+  }
+
+  // event handler
   const handleFocus = (e) => {
     setText(e.target.placeholder);
     e.target.placeholder = "";
     e.target.parentElement.className = "relative";
     e.target.parentElement.childNodes[1].classList.remove("hidden");
   };
+
   const handleBlur = (e) => {
-    if (text === 'Name') {
+    if (text === "Name") {
       setName(e.target.value);
-    } else if (text === 'Email') {
+    } else if (text === "Email") {
       setEmail(e.target.value);
-    } else if(text==="Password") {
+    } else if (text === "Password") {
       setPassword(e.target.value);
     } else if (text === "Confirm Password") {
       setConfirmPassword(e.target.value);
@@ -41,19 +65,19 @@ const Register = () => {
     e.target.placeholder = text;
     e.target.parentElement.className = "static";
     e.target.parentElement.childNodes[1].classList.add("hidden");
-  }
-  const handleRegister = async e => {
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (password===confirmPassword) {
+    if (password === confirmPassword) {
       await createUserWithEmailAndPassword(email, password);
-      console.log('registerd successfully');
       await updateProfile({ displayName: name });
-      console.log('profile updated Successfully', user);
     } else {
-      console.log('password does not match');
+      console.log("password does not match");
     }
-  }
-  console.log(user);
+  };
+
+  // registration form
   return (
     <section id="register" className="flex justify-center">
       <form

@@ -6,7 +6,7 @@ const Services = () => {
     const [services, setServices] = useServices([]);
     console.log(services);
     return (
-      <div>
+      <div className='m-20'>
         <h1 className='text-4xl m-8 text-center font-bold'>Tour Guide Services</h1>
             <div className="grid grid-cols-3 gap-4 justify-items-center items-center">
                 <>
