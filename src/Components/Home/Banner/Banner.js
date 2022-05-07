@@ -3,7 +3,7 @@ import banner from '../../../banner.jpg'
 
 const Banner = () => {
     return (
-      <div>
+      <div className='my-10'>
         <div className="relative">
           <div className="absolute right-80 bottom-60  ">
             <h1 className="text-7xl mb-2 p-4 bg-red-800 text-stone-300 font-bold hover:bg-[#2c2a38]">

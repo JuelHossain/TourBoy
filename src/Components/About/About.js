@@ -3,8 +3,8 @@ import me from '../../me.png'
 
 const About = () => {
     return (
-      <div className="">
-        <h1 className="text-5xl m-4 text-center">About Me </h1>
+      <div className="mb-20">
+        <h1 className="text-4xl m-4 font-bold text-center">About Me </h1>
         <div className="flex gap-4 justify-center">
           <div className=" image w-96 h-96">
             <img

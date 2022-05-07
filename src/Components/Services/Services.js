@@ -5,8 +5,8 @@ import Service from './Service/Service';
 const Services = () => {
     const [services] = useServices([]);
     return (
-      <div className='m-20'>
-        <h1 className='text-4xl m-8 text-center font-bold'>Tour Guide Services</h1>
+      <div className='mb-20'>
+        <h1 className='text-4xl m-4 text-center font-bold'>Tour Guide Services</h1>
             <div className="grid grid-cols-3 gap-4 justify-items-center items-center">
                 <>
           {services.map((service) => (

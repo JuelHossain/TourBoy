@@ -30,7 +30,7 @@ Here is the task that you need to do.
 ----
 13. Add two more routes. one route will be `blogs`. On the blog page, you will need to answer these three questions. This won't be a protected route
 
-    13.1 Difference between `authorization` and `authentication`
+    13.1 `Difference between `authorization` and `authentication
     
     13.2 Why are you using `firebase`? What other options do you have to implement authentication?
 
