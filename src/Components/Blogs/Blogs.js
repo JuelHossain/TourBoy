@@ -2,9 +2,9 @@ import React from 'react';
 
 const Blogs = () => {
     return (
-        <section id='blogs'>
-            <h1>This is blogs</h1>
-        </section>
+        <div>
+            <h1 className='text-3xl'> Question and Answers</h1>
+        </div>
     );
 };
 

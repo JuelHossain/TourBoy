@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './Components/Shared/Header/Header';
 import Home from './Components/Home/Home';
 import Services from './Components/Services/Services';
-import Blogs from './Components/Blogs/Blogs';
+import Places from './Components/Places/Places';
 import About from './Components/About/About';
 import Login from './Components/Authentication/Login/Login';
 import Register from './Components/Authentication/Register/Register';
@@ -12,6 +12,7 @@ import NotFound from './Components/Shared/NotFound/NotFound';
 import RequireAuth from './Components/Authentication/RequireAuth/RequireAuth';
 import Checkout from './Components/Shared/Checkout/Checkout';
 import SignOut from './Components/Authentication/SignOut/SignOut';
+import Blogs from './Components/Blogs/Blogs';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route path="/places" element={<Places></Places>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>

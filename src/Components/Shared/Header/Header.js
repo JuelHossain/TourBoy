@@ -15,12 +15,15 @@ const Header = () => {
   return (
     //header component
 
-    <header id="header" className="flex justify-between my-4 items-center sticky top-0 h-20 bg-white z-40">
+    <header
+      id="header"
+      className="flex justify-between my-4 items-center sticky top-0 h-20 bg-white z-40"
+    >
       {/* logo here  */}
-        <Link className="flex justify-center w-1/4 " to={"/"}>
-          <img className="h-full" src={logo} alt="" />
+      <Link className="flex justify-center w-1/4 " to={"/"}>
+        <img className="h-full" src={logo} alt="" />
       </Link>
-      
+
       {/* navigation here  */}
       <nav className="flex gap-2">
         <div id="home" className={navButton}>
@@ -28,6 +31,9 @@ const Header = () => {
         </div>
         <div id="services" className={navButton}>
           <CustomLink to={"/services"}>Services</CustomLink>
+        </div>
+        <div id="about" className={navButton}>
+          <CustomLink to={"/places"}>Places</CustomLink>
         </div>
         <div id="blogs" className={navButton}>
           <CustomLink to={"/blogs"}>Blogs</CustomLink>
@@ -41,14 +47,21 @@ const Header = () => {
       <div className=" flex w-1/4 justify-center underline underline-offset-4">
         {/* signup here  */}
         <div className={authButton}>
-          <Link to={user?'/user':'/register'}>{user?user.displayName:'Register'}</Link>
+          <Link to={user ? "/user" : "/register"}>
+            {user ? user.displayName : "Register"}
+          </Link>
         </div>
 
-        {/* login here  */
+        {
+          /* login here  */
           <div className={authButton}>
-            {user? <button onClick={logout}>LogOut</button> :
-            <Link to={'/login'}>{'Login'}</Link>}
-          </div>}
+            {user ? (
+              <button onClick={logout}>LogOut</button>
+            ) : (
+              <Link to={"/login"}>{"Login"}</Link>
+            )}
+          </div>
+        }
       </div>
     </header>
   );
