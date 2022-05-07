@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithFacebook,
@@ -11,15 +11,22 @@ import {
   inputField,
   submitButton,
 } from "../../../Utilities/ClassName/ClassName";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
   // states
   const [text, setText] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
+  // useref
+  const nameRef = useRef('');
+  const emailRef = useRef('');
+  const passwordRef = useRef('');
+  const confirmPasswordRef = useRef('');
+
+  //set value
+  
   //navigation
   const navigate = useNavigate();
 
@@ -34,46 +41,45 @@ const Register = () => {
 
   
   //conditional formatting 
-  if (googleuser||facebookuser||user) {
+  if (user || googleuser || facebookuser) {
+    console.log(user);
     navigate('/');
     window.location.reload(true);
   } else if (loading || updating || googleloading || facebookloading) {
-    console.log('loading');
+    return <Loading></Loading>
   } else if (error || updateError || googleerror || facebookerror) {
-    console.log(error || updateError || googleerror || facebookerror);
+    toast.error(error.toString().slice(37, -2));
   }
 
+  
   // event handler
   const handleFocus = (e) => {
-    setText(e.target.placeholder);
-    e.target.placeholder = "";
-    e.target.parentElement.className = "relative";
-    e.target.parentElement.childNodes[1].classList.remove("hidden");
+    setText(e.current.placeholder);
+    e.current.placeholder = "";
+    e.current.parentElement.classList.add('relative');
+    e.current.parentElement.childNodes[1].classList.remove("hidden");
   };
 
   const handleBlur = (e) => {
-    if (text === "Name") {
-      setName(e.target.value);
-    } else if (text === "Email") {
-      setEmail(e.target.value);
-    } else if (text === "Password") {
-      setPassword(e.target.value);
-    } else if (text === "Confirm Password") {
-      setConfirmPassword(e.target.value);
-    }
-    console.log(e.target.value);
-    e.target.placeholder = text;
-    e.target.parentElement.className = "static";
-    e.target.parentElement.childNodes[1].classList.add("hidden");
+    e.current.placeholder = text;
+    e.current.parentElement.className = "static";
+    e.current.parentElement.childNodes[1].classList.add("hidden");
   };
 
-  const handleRegister = async (e) => {
+  const handleRegister = async e => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      await createUserWithEmailAndPassword(email, password);
-      await updateProfile({ displayName: name });
+    let username = nameRef.current.value;
+    let email = emailRef.current.value;
+    let password = passwordRef.current.value;
+    let confirmPassword = confirmPasswordRef.current.value;
+    if (password !== confirmPassword) {
+    await confirmPasswordRef.current.setCustomValidity("Password Doesn't Match");
+    await confirmPasswordRef.current.reportValidity();
+    console.log(confirmPasswordRef);
     } else {
-      console.log("password does not match");
+      await confirmPasswordRef.current.setCustomValidity("");
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile(username);
     }
   };
 
@@ -87,11 +93,13 @@ const Register = () => {
         <h1 className="m-2 text-2xl text-cyan-900">Please Register Here</h1>
         <div>
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            ref={nameRef}
+            onFocus={() => handleFocus(nameRef)}
+            onBlur={() => handleBlur(nameRef)}
             className={inputField}
             type="text"
             placeholder="Name"
+            name="name"
             required
           />
           <span className=" absolute left-3 -top-3 px-2  bg-white hidden">
@@ -100,11 +108,13 @@ const Register = () => {
         </div>
         <div>
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            ref={emailRef}
+            onFocus={() => handleFocus(emailRef)}
+            onBlur={() => handleBlur(emailRef)}
             className={inputField}
             type="email"
             placeholder="Email"
+            name="email"
             required
           />
           <span className="absolute left-3 -top-3 px-2  bg-white hidden">
@@ -113,12 +123,15 @@ const Register = () => {
         </div>
         <div>
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            ref={passwordRef}
+            onFocus={() => handleFocus(passwordRef)}
+            onBlur={() => handleBlur(passwordRef)}
             className={inputField}
             type="password"
             placeholder="Password"
+            name="password"
             required
+            minLength="6"
           />
           <span className="absolute left-3 -top-3 px-2  bg-white hidden">
             {text}
@@ -126,11 +139,13 @@ const Register = () => {
         </div>
         <div>
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            ref={confirmPasswordRef}
+            onFocus={() => handleFocus(confirmPasswordRef)}
+            onBlur={() => handleBlur(confirmPasswordRef)}
             className={inputField}
             type="Password"
             placeholder="Confirm Password"
+            name="confirmPassword"
             required
           />
           <span className="absolute left-3 -top-3 px-2  bg-white hidden">
@@ -138,7 +153,12 @@ const Register = () => {
           </span>
         </div>
 
-        <input className={submitButton} type="submit" value="Register" />
+        <input
+          className={submitButton}
+          type="submit"
+          value="Register"
+          name="register"
+        />
         <input
           onClick={() => signInWithGoogle()}
           className={submitButton}
@@ -155,6 +175,7 @@ const Register = () => {
           Already Registered?
         </Link>
       </form>
+      <ToastContainer />
     </section>
   );
 };

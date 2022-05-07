@@ -3,8 +3,7 @@ import useServices from '../../Hooks/useServices';
 import Service from './Service/Service';
 
 const Services = () => {
-    const [services, setServices] = useServices([]);
-    console.log(services);
+    const [services] = useServices([]);
     return (
       <div className='m-20'>
         <h1 className='text-4xl m-8 text-center font-bold'>Tour Guide Services</h1>
